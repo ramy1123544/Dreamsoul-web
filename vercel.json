@@ -1,7 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/proxy", "destination": "/api/proxy.js" },
-    { "source": "/player/:id", "destination": "/player.html" },
-    { "source": "/(.*)", "destination": "/$1" }
-  ]
-}
