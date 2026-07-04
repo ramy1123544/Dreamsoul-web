@@ -1,6 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/player/:id", "destination": "/player.html" },
-    { "source": "/(.*)",       "destination": "/$1" }
-  ]
-}
