@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Soul — المتصدرون</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">GT</span>
+      <div>
+        <div class="logo-title">Dream Soul</div>
+        <div class="logo-sub">نظام اقتصادي متكامل</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="stocks.html">الأسهم</a>
+      <a href="leaderboard.html" class="active">المتصدرون</a>
+    </nav>
+    <div class="live-badge">
+      <span class="live-dot"></span> مباشر
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>🏆 لوحة المتصدرين</h2>
+    </div>
+
+    <!-- Top 3 Podium -->
+    <div class="podium" id="podium">
+      <div class="loading-text">جاري التحميل...</div>
+    </div>
+
+    <!-- Full List -->
+    <div class="lb-table-wrap">
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اللاعب</th>
+            <th>الرتبة</th>
+            <th>المستوى</th>
+            <th>الثروة</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body">
+          <tr><td colspan="5" class="loading-text">جاري التحميل...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="logo-title">Dream Soul</span>
+    <span>نظام اقتصادي لعالم ديسكورد</span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/leaderboard.js"></script>
+</body>
+</html>
