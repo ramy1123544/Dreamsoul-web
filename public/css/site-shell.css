@@ -1,0 +1,98 @@
+/* =========================================================
+   site-shell.css
+   هيدر مبسّط (٧٠px) + قائمة همبرغر + شريط تنقل سفلي ثابت
+   يعتمد على متغيرات :root الموجودة بـ style.css — بدون تكرار ألوان
+   ========================================================= */
+
+/* ── إخفاء العناصر القديمة اللي انتقلت للشريط السفلي/القائمة ── */
+.site-header .nav-links   { display: none !important; }
+.site-header .live-badge  { display: none !important; }
+
+/* ── الهيدر المبسّط ── */
+.site-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+.header-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.logo { margin: 0 auto; } /* توسيط الشعار تمامًا بين الهمبرغر والأفاتار */
+
+/* ── زر الهمبرغر ── */
+.hamburger-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text);
+  flex-shrink: 0;
+  transition: background .15s ease;
+}
+.hamburger-btn:hover { background: rgba(255,255,255,0.07); }
+
+.hamburger-dropdown {
+  position: absolute;
+  top: 60px;
+  z-index: 200;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 200px;
+  padding: 8px;
+  display: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+.hamburger-dropdown.show { display: block; }
+.hamburger-dropdown a, .hamburger-dropdown .disabled-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 8px;
+  font-size: 13.5px; color: var(--text); text-decoration: none;
+}
+.hamburger-dropdown a:hover { background: rgba(138,80,255,0.12); }
+.hamburger-dropdown .disabled-item { color: var(--muted); cursor: not-allowed; }
+.hamburger-dropdown .disabled-item .soon-tag {
+  margin-right: auto; font-size: 10px; background: rgba(255,255,255,0.06);
+  padding: 2px 7px; border-radius: 20px; color: var(--muted);
+}
+.hamburger-dropdown hr { border: none; border-top: 1px solid var(--border); margin: 6px 4px; }
+
+/* ── الشريط السفلي ── */
+body.has-bottom-nav { padding-bottom: 74px; } /* مساحة عشان المحتوى ما ينحجب */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: var(--bg3);
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 150;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.bottom-nav-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  transition: color .15s ease;
+}
+.bottom-nav-item .bn-icon { font-size: 19px; line-height: 1; }
+.bottom-nav-item.active { color: var(--accent2); }
+.bottom-nav-item.active .bn-icon { filter: drop-shadow(0 0 6px var(--accent)); }
+
+@media (min-width: 861px) {
+  /* بالشاشات الكبيرة الشريط السفلي مو ضروري لأن الهيدر كافي */
+  .bottom-nav { display: none; }
+  body.has-bottom-nav { padding-bottom: 0; }
+}
