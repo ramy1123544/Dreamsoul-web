@@ -1,0 +1,85 @@
+/* =========================================================
+   stocks-redesign.css
+   قائمة أسهم مضغوطة (Rows) بدل بطاقات ضخمة + sparkline صغير
+   ========================================================= */
+
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stock-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.stock-row:hover { background: rgba(255,255,255,0.045); }
+.stock-row.active { border-color: var(--accent); background: rgba(138,80,255,0.06); }
+
+.stock-row-emoji {
+  font-size: 20px;
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.stock-row-name-wrap { min-width: 0; width: 96px; flex-shrink: 0; }
+.stock-row-name { font-size: 13.5px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stock-row-id   { font-size: 11px; color: var(--muted); }
+
+.stock-row-spark { flex: 1; min-width: 60px; height: 30px; }
+.stock-row-spark svg { width: 100%; height: 100%; display: block; }
+
+.stock-row-price-wrap { text-align: left; flex-shrink: 0; min-width: 78px; }
+.stock-row-price  { font-size: 14.5px; font-weight: 800; color: var(--text); }
+.stock-row-change { font-size: 11.5px; font-weight: 700; margin-top: 1px; }
+.stock-row-change.up   { color: var(--green); }
+.stock-row-change.down { color: var(--red); }
+
+/* عرض جميع الأسهم */
+.stock-list-more-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--accent2);
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.stock-list-more-btn:hover { background: rgba(138,80,255,0.08); }
+
+.stock-row.hidden-row { display: none; }
+
+/* ── الخريطة الحرارية (D3) ── */
+.heatmap-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 18px 10px;
+  margin-bottom: 18px;
+}
+.heatmap-title {
+  font-size: 14.5px; font-weight: 700; color: var(--text);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.heatmap-hint { font-size: 11px; color: var(--muted); font-weight: 500; }
+.heatmap-stage { width: 100%; }
+.heatmap-stage svg text { pointer-events: none; }
+
+@media (max-width: 520px) {
+  .stock-row-name-wrap { width: 70px; }
+}
