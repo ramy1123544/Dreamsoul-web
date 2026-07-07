@@ -35,8 +35,8 @@
   </div>
 </header>
 
-<!-- ══ USER DASHBOARD (يظهر بس لو مسجل دخول) ══ -->
-<section class="user-dash" id="user-dash" style="display:none">
+<!-- ══ USER DASHBOARD (يظهر للمستخدمين المسجلين) ══ -->
+<section class="user-dash" id="user-dash" style="display:flex">
   <div class="ud-hero">
     <div class="ud-hero-bg"></div>
     <div class="ud-hero-top">
@@ -68,6 +68,7 @@
     </div>
   </div>
 
+  <!-- ══ الشبكة المالية (البنك، المحفظة، الإنجازات، المراهقات) ══ -->
   <div class="ud-financial-grid">
     <div class="ud-fcard">
       <div class="ud-ficon">🏦</div>
@@ -91,6 +92,7 @@
     </div>
   </div>
 
+  <!-- ══ المكافأة اليومية ══ -->
   <div class="ud-reward-banner">
     <div class="ud-reward-icon">🎁</div>
     <div class="ud-reward-text">
@@ -100,6 +102,7 @@
     <button class="ud-reward-btn" onclick="alert('قريباً 🎁')">استلام 🎁</button>
   </div>
 
+  <!-- ══ سوق الأسهم ══ -->
   <div class="ud-stocks-card">
     <div class="ud-stocks-header">
       <span>سوق الأسهم 📈</span>
@@ -110,8 +113,8 @@
   </div>
 </section>
 
-<!-- ══ HERO (للزوار غير المسجلين) ══ -->
-<section class="hero" id="guest-hero">
+<!-- ══ HERO (للزوار غير المسجلين - مخفي حالياً) ══ -->
+<section class="hero" id="guest-hero" style="display:none">
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-label">النشاط الآن</div>
@@ -120,7 +123,7 @@
   </div>
 </section>
 
-<!-- ══ STATS GRID ══ -->
+<!-- ══ STATS GRID (لإحصائيات الموقع) ══ -->
 <section class="section">
   <div class="container">
     <div class="stats-grid">
@@ -153,7 +156,7 @@
   </div>
 </section>
 
-<!-- ══ STOCKS TICKER ══ -->
+<!-- ══ STOCKS TICKER (أسهم سريعة) ══ -->
 <section class="section section-dark">
   <div class="container">
     <div class="section-header">
