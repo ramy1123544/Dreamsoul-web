@@ -1,23 +1,42 @@
 /**
  * home-dashboard.js
- * يعرض لوحة شخصية بالرئيسية لو المستخدم مسجل دخول (نفس بيانات player.html الحقيقية)
- * أما المكافأة اليومية والإنجازات والمراهنات فهي عناصر بصرية ثابتة حالياً
+ * يعرض لوحة شخصية بالرئيسية لو المستخدم مسجل دخول (نفس بيانات player.html الحقيقية)
+ * أما المكافأة اليومية والإنجازات والمراهنات فهي عناصر بصرية ثابتة حالياً
  * (لا يوجد نظام حقيقي لها بعد بالبوت).
  */
 
-const RARITY_XP_TABLE = { 1: 100, 2: 150, 3: 220, 4: 320 }; // نفس جدول player.js تقريباً كحد أدنى للعرض
+const RARITY_XP_TABLE = { 1: 100, 2: 150, 3: 220, 4: 320 };
+
+// خريطة الأيقونات الخاصة بالأسهم
+const STOCK_EMOJIS = {
+  'GT': '🎮',
+  'BTC': '₿',
+  'ETH': '💎',
+};
 
 async function initHomeDashboard() {
   const user = window.Auth ? Auth.getUser() : null;
-  if (!user) return; // خليه مخفي، يبقى القسم الترحيبي العام للزوار
+  
+  // إذا لم يكن هناك مستخدم، اخفي اللوحة وأظهر القسم الترحيبي
+  if (!user) {
+    document.getElementById('user-dash').style.display = 'none';
+    document.getElementById('guest-hero').style.display = 'block';
+    return;
+  }
 
   const data = await API.player(user.id);
-  if (!data || data.error) return;
+  if (!data || data.error) {
+    // إذا فشل تحميل البيانات، اخفي اللوحة
+    document.getElementById('user-dash').style.display = 'none';
+    document.getElementById('guest-hero').style.display = 'block';
+    return;
+  }
 
-  document.getElementById('user-dash').style.display  = 'flex';
-  document.getElementById('guest-hero').style.display  = 'none';
+  // ✅ إظهار لوحة المستخدم وإخفاء القسم الترحيبي
+  document.getElementById('user-dash').style.display = 'flex';
+  document.getElementById('guest-hero').style.display = 'none';
 
-  // الأفاتار
+  // الأفاتار
   const avatarEl = document.getElementById('ud-avatar');
   avatarEl.src = data.avatar
     ? `https://cdn.discordapp.com/avatars/${user.id}/${data.avatar}.png?size=128`
@@ -27,10 +46,10 @@ async function initHomeDashboard() {
     avatarEl.src = `https://cdn.discordapp.com/embed/avatars/${parseInt(user.id) % 5}.png`;
   };
 
-  document.getElementById('ud-name').textContent  = data.username || user.id;
-  document.getElementById('ud-rank').textContent  = data.rank || 'مبتدئ';
-  document.getElementById('ud-id').textContent    = user.id;
-  document.getElementById('ud-level').textContent   = data.level || 1;
+  document.getElementById('ud-name').textContent = data.username || user.id;
+  document.getElementById('ud-rank').textContent = data.rank || 'مبتدئ';
+  document.getElementById('ud-id').textContent = user.id;
+  document.getElementById('ud-level').textContent = data.level || 1;
   document.getElementById('ud-level-2').textContent = data.level || 1;
 
   // XP
@@ -41,10 +60,10 @@ async function initHomeDashboard() {
 
   // العصابة والمهنة
   if (data.gang) document.getElementById('ud-gang').textContent = `🚩 ${data.gang}`;
-  if (data.job)  document.getElementById('ud-job').textContent  = `🔧 ${data.job}`;
+  if (data.job) document.getElementById('ud-job').textContent = `🔧 ${data.job}`;
 
-  // الشبكة المالية (بنك ومحفظة حقيقية — الإنجازات والمراهنات عناصر بصرية ثابتة حالياً)
-  document.getElementById('ud-bank').textContent   = '$' + fmt(data.bank || 0);
+  // الشبكة المالية
+  document.getElementById('ud-bank').textContent = '$' + fmt(data.bank || 0);
   document.getElementById('ud-wallet').textContent = '$' + fmt(data.balance || 0);
 
   loadStocksPreview();
@@ -75,9 +94,10 @@ async function loadStocksPreview() {
   box.innerHTML = top3.map(s => {
     const change = +((s.price - s.basePrice) / s.basePrice * 100).toFixed(2);
     const up = change >= 0;
+    const emoji = STOCK_EMOJIS[s.id] || s.emoji || '📈';
     return `
       <div class="ud-stock-row">
-        <div class="ud-stock-emoji">${s.emoji || '📈'}</div>
+        <div class="ud-stock-emoji">${emoji}</div>
         <div class="ud-stock-name-wrap">
           <div class="ud-stock-name">${s.name}</div>
           <div class="ud-stock-id">${s.id}</div>

@@ -1,7 +1,7 @@
 /**
  * site-shell.js
  * يضيف زر الهمبرغر بالهيدر + شريط تنقل سفلي ثابت، بدون ما يلمس
- * منطق auth.js أو محتوى الصفحة. يشتغل بكل الصفحات بعد إضافة:
+ * منطق auth.js أو محتوى الصفحة. يشتغل بكل الصفحات بعد إضافة:
  *   <link rel="stylesheet" href="css/site-shell.css">
  *   <script src="js/site-shell.js"></script>
  * (تحطه بعد auth.js بالـ body)
@@ -10,9 +10,10 @@
 (function () {
   const CURRENT_PAGE = location.pathname.split('/').pop() || 'index.html';
 
+  // ✅ الترتيب الصحيح من اليمين لليسار (RTL)
   const NAV_ITEMS = [
-    { href: 'index.html',       icon: '🏠', label: 'الرئيسية' },
-    { href: 'stocks.html',      icon: '📈', label: 'الأسهم' },
+    { href: 'index.html',       icon: '🏠', label: 'الرئيسية' },
+    { href: 'stocks.html',      icon: '📈', label: 'الأسهم' },
     { href: 'leaderboard.html', icon: '🏆', label: 'المتصدرون' },
     { href: 'shop.html',        icon: '🛒', label: 'المتجر' },
     { href: 'player.html',      icon: '👤', label: 'الحساب' },
@@ -52,15 +53,15 @@
 
     const btn = document.createElement('button');
     btn.className = 'hamburger-btn';
-    btn.setAttribute('aria-label', 'القائمة');
+    btn.setAttribute('aria-label', 'القائمة');
     btn.innerHTML = '☰';
 
     const dropdown = document.createElement('div');
     dropdown.className = 'hamburger-dropdown';
     dropdown.innerHTML = `
-      <a href="index.html">ℹ️ عن الموقع</a>
+      <a href="index.html">i️ عن الموقع</a>
       <hr>
-      <div class="disabled-item">⚙️ الإعدادات <span class="soon-tag">قريباً</span></div>
+      <div class="disabled-item">⚙️ الإعدادات <span class="soon-tag">قريباً</span></div>
       <div class="disabled-item">💬 الدعم <span class="soon-tag">قريباً</span></div>
       <div class="disabled-item">🌐 اللغة <span class="soon-tag">قريباً</span></div>
       <hr>
